@@ -35,3 +35,21 @@ jobs:
 
       - name: Run Tests
         run: mvn test
+
+  deploy-pages:
+    needs: build-and-test # Only run if Build and Test passes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # This assumes your index.html is in the root directory
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
