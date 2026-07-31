@@ -37,7 +37,7 @@ jobs:
         run: mvn test
 
   deploy-pages:
-    needs: build-and-test # Only run if Build and Test passes
+    needs: [build, test] # Only run if Build and Test passes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
